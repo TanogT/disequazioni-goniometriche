@@ -1,14 +1,15 @@
-package disequazioni2;
-
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JPanel;
 import javax.swing.*;
 
-import disequazioni.*;
-
-public class Frame {
+public class Frame extends JPanel
+{
+	private static final long serialVersionUID = 1L;
+	//private static final long serialVersionUID = 1L;
 	
 	private JFrame jf = new JFrame();
 	private JButton button = new JButton("Fatto");
@@ -25,65 +26,101 @@ public class Frame {
 
 	private String[] optionsToChoose2 = {">", "<", "="};
 	private JComboBox<String> jComboBox2 = new JComboBox<>(optionsToChoose2);
-	private CartesianPlane plane = new CartesianPlane();
 	
 	private CalcoloAngolo ca = new CalcoloAngolo();
 	
-	private static double x1, x2, y1, y2;
+	//private double x1, x2, y1, y2;
+	//private boolean fuori;
+	//private double gradoArco1, gradoArco2;
 	
-	private static int segno;
-	private static int funz;
+	/*public boolean getFuori() {
+		return fuori;
+	}
+
+	public void setFuori(boolean fuori) {
+		this.fuori = fuori;
+	}*/
+
+	/*public double getGradoArco1() {
+		return gradoArco1;
+	}
+
+	public void setGradoArco1(double gradoArco1) {
+		this.gradoArco1 = gradoArco1;
+	}
+
+	public double getGradoArco2() {
+		return gradoArco2;
+	}
+
+	public void setGradoArco2(double gradoArco2) {
+		this.gradoArco2 = gradoArco2;
+	}*/
+
+	private int segno;
+	private int funz;
 	
-	public static int getSegno() {
-		return segno;
-	}
-
-	public static void setSegno(int segno) {
-		Frame.segno = segno;
-	}
-
-	public static int getFunz() {
-		return funz;
-	}
-
-	public static void setFunz(int funz) {
-		Frame.funz = funz;
-	}
-
-	public static double getX1() {
-		return x1;
-	}
-
-	public static double getX2() {
-		return x2;
-	}
-
-	public static double getY1() {
-		return y1;
-	}
-
-	public static double getY2() {
-		return y2;
-	}
-
-	private static boolean pulito = false;
+	private boolean pulito = false;
 	
-	public static boolean isPulito() {
+	public void setPulito(boolean pulito) {
+		this.pulito = pulito;
+	}
+	public boolean getPulito() {
 		return pulito;
 	}
 
 	private String valore;
-	private static int op;
 	
-	public static int getOp() {
-		return op;
+	//static
+	private int op;
+	private int funzione;
+	
+	public int getSegno() {
+		return segno;
 	}
 
-	private static int funzione;
-	
-	public static int getFunzione() {
-		return funzione;
+	public void setSegno(int segno) {
+		this.segno = segno;
 	}
+
+	public int getFunz() {
+		return funz;
+	}
+
+	public void setFunz(int funz) {
+		this.funz = funz;
+	}
+
+	/*public double getX1() {
+		return x1;
+	}
+
+	public double getX2() {
+		return x2;
+	}
+
+	public double getY1() {
+		return y1;
+	}
+
+	public double getY2() {
+		return y2;
+	}*/
+
+	
+	/*public boolean isPulito() {
+		return pulito;
+	}*/
+
+	
+	/*public int getOp() {
+		return op;
+	}*/
+
+	
+	/*public int getFunzione() {
+		return funzione;
+	}*/
 
 	public Frame(){
 		// panel scelta funzione
@@ -92,21 +129,19 @@ public class Frame {
 		initButton();
 		initComboBox();
 		initPanel();
-		plane.getClass();
-		
+		this.getClass();
 	}
 	
 	private void initFrame() {// panel piano cartesiano
 		jf.setTitle("piano cartesiano");
-		jf.setSize(895, 450);
+		jf.setSize(915, 450);
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jf.setResizable(false);
 		jf.setLayout(null);
-		
-		CartesianPlane c = new CartesianPlane();
-		c.setBounds(260, 0, 600, 400);
 
-		jf.add(c);
+		this.setBounds(260, 0, 600, 400);
+
+		jf.add(this);
 		jf.add(panel);
 		jf.setVisible(true);
 	}
@@ -118,33 +153,33 @@ public class Frame {
 		label1.setBounds(10,10,230,25);
 		//label1.setBorder(BorderFactory.createLineBorder(Color.black));
 			
-		label2.setBounds(10, 80, 240, 25);
+		label2.setBounds(10, 80, 260, 25);
 		label2.setBorder(BorderFactory.createLineBorder(Color.black));
 		label2.setEnabled(true);
 		
 		label3.setText("Risultato in gradi");
 		label3.setHorizontalAlignment(JLabel.CENTER);
 		label3.setEnabled(false);
-		label3.setBounds(10,140,110,25);
+		label3.setBounds(10,140,260,25);
 		//label1.setBorder(BorderFactory.createLineBorder(Color.black));
-			
-		label4.setBounds(10, 165, 110, 25);
-		label4.setBorder(BorderFactory.createLineBorder(Color.black));
-		label4.setEnabled(false);
-		
+	
 		label5.setText("Risultato in radianti");
 		label5.setHorizontalAlignment(JLabel.CENTER);
 		label5.setEnabled(false);
-		label5.setBounds(130,140,120,25);
+		label5.setBounds(10,190,260,25);
 		//label1.setBorder(BorderFactory.createLineBorder(Color.black));
 			
-		label6.setBounds(130, 165, 120, 25);
+		label4.setBounds(10, 165, 260, 25);
+		label4.setBorder(BorderFactory.createLineBorder(Color.black));
+		label4.setEnabled(false);
+		
+		label6.setBounds(10, 215, 260, 25);
 		label6.setBorder(BorderFactory.createLineBorder(Color.black));
 		label6.setEnabled(false);
 	}   
 	
 	private void initButton() {
-		button.setBounds(10, 115, 105, 25);
+		button.setBounds(10, 115, 125, 25);
 		ActionListener but = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -154,29 +189,33 @@ public class Frame {
 				System.out.println("bottone premuto\t" + op + "\t" + valore + "\t" + funzione);	
 				// aspetto gaetano metodo 
 				ca.setEspressione(valore, op , funzione);
-				x1 = ca.getX1();
+				/*x1 = ca.getX1();
 				y1 = ca.getY1();
 				x2 = ca.getX2();
-				y2 = ca.getY2();
+				y2 = ca.getY2();*/
 				//label2.setText(ca.get);
 				label4.setText(ca.getGradiString());
 				label6.setText(ca.getRadiantiString());
 				setSegno(op);
 				setFunz(funzione);
-				pulito = true;
+				setPulito(true);
+				//setAll(segno, funz, pulito, ca.getX1(), ca.getX2(), ca.getY1(), ca.getY2(), ca.getGradoArco1(), ca.getGradi2(), ca.isFuori());
+				//plane.setProcedo(true);
+				jf.repaint();
 			}
 		};
 		button.addActionListener(but);
 		
-		butPulisci.setBounds(125, 115, 105, 25);
+		butPulisci.setBounds(145, 115, 125, 25);
 		ActionListener pulisci = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				valore = null;
 				label4.setText("");
 				label6.setText("");
-				System.out.println("pulito");
-				pulito = false;
+				setPulito(false);
+				System.out.println("Guarda che ti ho pulito....");
+				//plane.setProcedo(pulito);
 			}
 			
 		};
@@ -184,7 +223,7 @@ public class Frame {
 	}
 	
 	private void initPanel() {
-		panel.setBounds(0,0, 260, 200);
+		panel.setBounds(0,0, 280, 250);
 		panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		panel.setLayout(null);
 		       
@@ -201,8 +240,8 @@ public class Frame {
 	}
 	
 	private void initComboBox() {
-		jComboBox.setBounds(10, 45, 115, 25);
-		jComboBox2.setBounds(135, 45, 115, 25);
+		jComboBox.setBounds(10, 45, 125, 25);
+		jComboBox2.setBounds(145, 45, 125, 25);
 		
 		jComboBox.addActionListener(new ActionListener() {  
 	        public void actionPerformed(ActionEvent e) {       
@@ -222,4 +261,104 @@ public class Frame {
 	        }  
 		});     
 	}
+	
+	@Override
+	public void paintComponent(Graphics g) 
+	{
+		super.paintComponent(g);
+		super.setBorder(BorderFactory.createLineBorder(Color.black));
+		super.setBounds(290, 0, 600, 400);
+		g.setColor(Color.BLACK);
+		g.drawLine(300, 0, 300, 400);
+		g.drawLine(0, 200, 600, 200);
+		g.drawOval(250, 150, 100, 100);
+		g.drawString("1", 310, 150);
+		g.drawString("-1", 310, 260);
+		g.drawString("-1", 235, 200);
+		g.drawString("1", 355, 200);
+		
+		boolean procedo = getPulito();
+		int segno = getSegno();
+		int funzione = getFunz();
+		double x1 = ca.getX1();
+		double x2 = ca.getX2();
+		double y1 = ca.getY1();
+		double y2 = ca.getY2();
+		double gradoArco1 = ca.getGradoArco1();
+		double gradoArco2 = ca.getGradoArco2();
+		boolean fuori = ca.isFuori();
+		
+		if(procedo) {
+			if(funzione == 0) {
+				if(!fuori) {
+					g.drawLine((int)300, 200, (int)(300 + (double)(50 * x1)), (int)(200 - (double)(50 * y1)));
+					g.drawLine((int)300, 200, (int)(300 + (double)(50 * x2)), (int)(200 - (double)(50 * y1)));
+				}
+				g.setColor(Color.red);
+				g.drawLine(0, (int)(200 - (double)(50 * y1)), 600, (int)(200 - (double)(50 * y1)));
+				
+				int x = segno;
+				
+				switch(x) {
+				case 0:
+					g.drawArc(250, 150, 100, 100, (int)gradoArco1, (int)gradoArco2 - (int)gradoArco1);
+					break;
+				case 1: 
+					g.drawArc(250, 150, 100, 100, (int)gradoArco1, (int)gradoArco2 - (int)gradoArco1);	//180 + 2 * (int)
+					break;
+				case 2: 
+					break;
+				default: 
+					System.err.println("errore switch op cp");
+					break;
+				}
+			}else if(funzione == 1) {
+				if(!fuori) {
+					g.drawLine((int)300, 200, (int)(300 + (double)(50 * x1)), (int)(200 + (double)(50 * y1)));
+					g.drawLine((int)300, 200, (int)(300 + (double)(50 * x1)), (int)(200 + (double)(50 * y2)));
+				}
+				g.setColor(Color.red);
+				g.drawLine((int)((int)(300 + (double)(50 *  x1))), 0, (int)(300 + (double)(50 * x1)), 400);
+				
+				int x = segno;
+				switch(x) {
+				case 0:
+					g.drawArc(250, 150, 100, 100, (int)gradoArco1, (int)gradoArco2 - (int)gradoArco1);
+					
+					break;
+				case 1: 
+					g.drawArc(250, 150, 100, 100, (int)gradoArco1, (int)gradoArco2 - (int)gradoArco1);
+					break;
+				case 2: 
+					break;
+				default: 
+					System.err.println("errore switch op cp");
+					break;
+				}
+			}else if(funzione == 2) {
+				g.setColor(Color.red);
+				g.drawLine(350, 0, 350, 400);
+				g.drawLine(0, (int)(200 - (double)(50 * y1)), 600, (int)(200 - (double)(50 * y1)));
+				
+				int x = segno;
+				switch(x) {
+				case 0:
+					g.drawArc(250, 150, 100, 100, (int)gradoArco1, (int)gradoArco2 - (int)gradoArco1);
+					break;
+				case 1: 
+					g.drawArc(250, 150, 100, 100, (int)gradoArco1, (int)gradoArco2 - (int)gradoArco1);	//180 + 2 * (int)
+					break;
+				case 2: 
+					break;
+				default: 
+					System.err.println("errore switch op cp");
+					break;
+				}
+				
+				g.drawLine((int)(300 + (double)(50 * x1)), (int)(200 - (double)(50 * y1)), (int)(300 + (double)(50 * x2)), (int)(200 - (double)(50 * y2)));
+			}
+		}				
+	}
+	
+	
 }
